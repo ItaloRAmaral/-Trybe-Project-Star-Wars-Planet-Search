@@ -10,7 +10,6 @@ function StarwarProvider(props) {
       const url = 'https://swapi-trybe.herokuapp.com/api/planets/';
       const fetchData = await fetch(url);
       const data = await fetchData.json();
-      console.log(data);
       setGetPlanets(data);
     } catch (error) {
       console.log(error);
@@ -18,7 +17,7 @@ function StarwarProvider(props) {
   };
 
   const { children } = props;
-  const contextType = { planets, fetchPlanets };
+  const contextType = { fetchPlanets, planets };
 
   return (
     <StarwarContext.Provider value={ contextType }>

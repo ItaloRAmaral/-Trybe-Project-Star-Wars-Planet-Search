@@ -3,7 +3,7 @@ import Header from '../components/header';
 import StarwarContext from '../context/StarwarContext';
 
 function Home() {
-  const { fetchPlanets, planets } = useContext(StarwarContext);
+  const { fetchPlanets } = useContext(StarwarContext);
 
   useEffect(() => {
     fetchPlanets();
