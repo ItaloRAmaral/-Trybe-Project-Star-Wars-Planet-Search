@@ -3,7 +3,12 @@ import StarwarContext from '../context/StarwarContext';
 import TableInfo from './tableInfo';
 
 function Table() {
-  const { fetchPlanets, planets, searchByName, setGetPlanets } = useContext(StarwarContext);
+  const {
+    fetchPlanets,
+    planets,
+    searchByName,
+    setGetPlanets,
+  } = useContext(StarwarContext);
 
   useEffect(() => {
     fetchPlanets();
@@ -11,11 +16,12 @@ function Table() {
   console.log(planets);
 
   useEffect(() => {
-    if (searchByName=== '') {
+    if (searchByName === '') {
       fetchPlanets();
     } else {
       console.log(searchByName);
-      const filter = planets.filter((item) => item.name.toLowerCase().includes(searchByName));
+      const filter = planets
+        .filter((item) => item.name.toLowerCase().includes(searchByName));
       console.log(filter);
       setGetPlanets(filter);
     }
@@ -45,23 +51,6 @@ function Table() {
           ? null
           : planets.map((planet, i) => <TableInfo key={ i } planet={ planet } />)}
         <TableInfo />
-        {/* {planets.map((planet, i) => (
-          <tr key={i}>
-            <td>{planet.name}</td>
-            <td>{planet.rotation_period}</td>
-            <td>{planet.orbital_period}</td>
-            <td>{planet.diameter}</td>
-            <td>{planet.climate}</td>
-            <td>{planet.gravity}</td>
-            <td>{planet.terrain}</td>
-            <td>{planet.surface_water}</td>
-            <td>{planet.population}</td>
-            <td>{planet.films}</td>
-            <td>{planet.created}</td>
-            <td>{planet.edited}</td>
-            <td>{planet.url}</td>
-          </tr>
-        ))} */}
       </table>
     </section>
   );
