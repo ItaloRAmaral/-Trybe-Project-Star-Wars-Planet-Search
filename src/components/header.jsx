@@ -1,13 +1,28 @@
-import React from 'react';
-// import StarwarContext from "../context/StarwarContext";
+import React, { useContext } from 'react';
+import StarwarContext from '../context/StarwarContext';
 
 function Header() {
+  const { handleChange } = useContext(StarwarContext);
+
+  const handleSearch = ({ target }) => {
+    const name = target.value.toLowerCase();
+    handleChange(name);
+  };
+
   return (
     <section>
       <h1>Star Wars Planets Search</h1>
-      <label htmlFor="planetName">
+      <label
+        htmlFor="planetName"
+      >
         Planet Name
-        <input type="text" name="planetName" id="planetName" />
+        <input
+          type="text"
+          onChange={ handleSearch }
+          name="planetName"
+          id="planetName"
+          data-testid="name-filter"
+        />
       </label>
       <div>
         <label htmlFor="planetParameter">
@@ -29,7 +44,7 @@ function Header() {
         </label>
         <label htmlFor="number">
           Number
-          <input type="number" name="number" value="0" id="number" />
+          <input type="number" name="number" id="number" />
         </label>
         <button type="button">Filtrar</button>
       </div>

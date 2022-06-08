@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+// import StarwarContext from "../context/StarwarContext";
 
 function TableInfo(props) {
+  // const { planets } = useContext(StarwarContext);
   const { planet } = props;
   console.log(planet);
+
   return (
     <tbody>
       {planet === undefined ? null : (
