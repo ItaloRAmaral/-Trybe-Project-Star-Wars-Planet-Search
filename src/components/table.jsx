@@ -5,11 +5,14 @@ import TableInfo from './tableInfo';
 function Table() {
   const {
     fetchPlanets,
-    planets,
     searchByName,
-    setGetPlanets,
+    planets,
     filtredPlanets,
     setFiltredPlanets,
+    numericFilter,
+    filterType,
+    operatorType,
+    valueType,
   } = useContext(StarwarContext);
 
   useEffect(() => {
@@ -17,15 +20,43 @@ function Table() {
   }, []);
 
   useEffect(() => {
-    console.log(searchByName);
     const filter = planets
       .filter((item) => item.name.toLowerCase().includes(searchByName));
-    console.log(filter);
-    setFiltredPlanets(filter);
-  }, [searchByName]);
+
+    const newFilter = numericFilter.reduce((acc, filtro) => acc.filter((planet) => {
+      switch (filtro.operatorType) {
+      case 'menor que':
+        return Number(planet[filtro.filterType]) < Number(filtro.valueType);
+
+      case 'maior que':
+        return Number(planet[filtro.filterType]) > Number(filtro.valueType);
+
+      case 'igual a':
+        return Number(planet[filtro.filterType]) === Number(filtro.valueType);
+
+      default:
+        return filter;
+      }
+    }), filter);
+
+    setFiltredPlanets(newFilter);
+  }, [searchByName, numericFilter]);
 
   return (
     <section>
+      {
+        numericFilter.length > 0 && (
+          <h1>Filtros Aplicado</h1>
+
+        )
+      }
+      {
+        numericFilter.length > 0 && (
+
+          numericFilter.map((filter) => <span>{`${filter.filterType} & ${filter.operatorType} ${filter.valueType}`}</span>)
+
+        )
+      }
       <table>
         <thead>
           <tr>

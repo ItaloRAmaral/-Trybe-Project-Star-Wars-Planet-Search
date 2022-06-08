@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 function TableInfo(props) {
   const { planet } = props;
-  console.log(planet);
 
   return (
     <tbody>
