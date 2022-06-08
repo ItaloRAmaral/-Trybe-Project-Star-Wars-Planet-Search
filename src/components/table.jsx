@@ -10,9 +10,6 @@ function Table() {
     filtredPlanets,
     setFiltredPlanets,
     numericFilter,
-    filterType,
-    operatorType,
-    valueType,
   } = useContext(StarwarContext);
 
   useEffect(() => {
@@ -23,38 +20,48 @@ function Table() {
     const filter = planets
       .filter((item) => item.name.toLowerCase().includes(searchByName));
 
-    const newFilter = numericFilter.reduce((acc, filtro) => acc.filter((planet) => {
-      switch (filtro.operatorType) {
-      case 'menor que':
-        return Number(planet[filtro.filterType]) < Number(filtro.valueType);
+    const newFilter = numericFilter.reduce(
+      (acc, filtro) => acc.filter((planet) => {
+        switch (filtro.operatorType) {
+        case 'menor que':
+          return (
+            Number(planet[filtro.filterType]) < Number(filtro.valueType)
+          );
 
-      case 'maior que':
-        return Number(planet[filtro.filterType]) > Number(filtro.valueType);
+        case 'maior que':
+          return (
+            Number(planet[filtro.filterType]) > Number(filtro.valueType)
+          );
 
-      case 'igual a':
-        return Number(planet[filtro.filterType]) === Number(filtro.valueType);
+        case 'igual a':
+          return (
+            Number(planet[filtro.filterType]) === Number(filtro.valueType)
+          );
 
-      default:
-        return filter;
-      }
-    }), filter);
+        default:
+          return filter;
+        }
+      }),
+      filter,
+    );
 
     setFiltredPlanets(newFilter);
-  }, [searchByName, numericFilter]);
+  }, [searchByName, numericFilter, planets, setFiltredPlanets]);
 
   return (
     <section>
       {
         numericFilter.length > 0 && (
           <h1>Filtros Aplicado</h1>
-
         )
       }
       {
         numericFilter.length > 0 && (
-
-          numericFilter.map((filter) => <span>{`${filter.filterType} & ${filter.operatorType} ${filter.valueType}`}</span>)
-
+          numericFilter.map((filter) => (
+            <span key={ filter.filterType }>
+              {`${filter.filterType} 
+            & ${filter.operatorType} ${filter.valueType}`}
+            </span>))
         )
       }
       <table>
