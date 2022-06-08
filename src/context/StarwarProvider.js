@@ -4,6 +4,7 @@ import StarwarContext from './StarwarContext';
 
 function StarwarProvider(props) {
   const [planets, setGetPlanets] = useState([]);
+  const [filtredPlanets, setFiltredPlanets] = useState([]);
   const [searchByName, setSearchByName] = useState('');
 
   const fetchPlanets = async () => {
@@ -12,6 +13,7 @@ function StarwarProvider(props) {
       const fetchData = await fetch(url);
       const { results } = await fetchData.json();
       setGetPlanets(results);
+      setFiltredPlanets(results);
     } catch (error) {
       console.log(error);
     }
@@ -28,6 +30,8 @@ function StarwarProvider(props) {
     handleChange,
     searchByName,
     setGetPlanets,
+    filtredPlanets,
+    setFiltredPlanets,
   };
 
   return (

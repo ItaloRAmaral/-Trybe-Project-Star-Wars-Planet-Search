@@ -8,23 +8,20 @@ function Table() {
     planets,
     searchByName,
     setGetPlanets,
+    filtredPlanets,
+    setFiltredPlanets,
   } = useContext(StarwarContext);
 
   useEffect(() => {
     fetchPlanets();
   }, []);
-  console.log(planets);
 
   useEffect(() => {
-    if (searchByName === '') {
-      fetchPlanets();
-    } else {
-      console.log(searchByName);
-      const filter = planets
-        .filter((item) => item.name.toLowerCase().includes(searchByName));
-      console.log(filter);
-      setGetPlanets(filter);
-    }
+    console.log(searchByName);
+    const filter = planets
+      .filter((item) => item.name.toLowerCase().includes(searchByName));
+    console.log(filter);
+    setFiltredPlanets(filter);
   }, [searchByName]);
 
   return (
@@ -47,9 +44,11 @@ function Table() {
             <th>URL</th>
           </tr>
         </thead>
-        {planets.length === 0
+        {filtredPlanets.length === 0
           ? null
-          : planets.map((planet, i) => <TableInfo key={ i } planet={ planet } />)}
+          : filtredPlanets.map((planet, i) => (
+            <TableInfo key={ i } planet={ planet } />
+          ))}
         <TableInfo />
       </table>
     </section>
