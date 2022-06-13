@@ -10,6 +10,12 @@ function StarwarProvider(props) {
   const [operatorType, setOperatorFilter] = useState('maior que');
   const [valueType, setValue] = useState(0);
   const [numericFilter, setNumericFilter] = useState([]);
+  const [filtersType, setFiltersType] = useState(['population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water',
+  ]);
 
   const fetchPlanets = async () => {
     try {
@@ -66,6 +72,8 @@ function StarwarProvider(props) {
     filterType,
     operatorType,
     valueType,
+    filtersType,
+    setFiltersType,
   };
 
   return (

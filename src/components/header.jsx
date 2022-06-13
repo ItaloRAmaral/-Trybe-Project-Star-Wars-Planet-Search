@@ -7,8 +7,20 @@ function Header() {
     handleFilterType,
     handleOperatorFilter,
     handleValue,
+    valueType,
+    filterType,
+    filtersType,
+    setFiltersType,
     handleNumericFilter,
   } = useContext(StarwarContext);
+
+  // const filtersType = [
+  //   'population',
+  //   'orbital_period',
+  //   'diameter',
+  //   'rotation_period',
+  //   'surface_water',
+  // ];
 
   const handleSearch = ({ target }) => {
     const name = target.value.toLowerCase();
@@ -28,6 +40,12 @@ function Header() {
   const handleValueType = ({ target }) => {
     const name = target.value;
     handleValue(name);
+  };
+
+  const handleFiltersType = () => {
+    handleNumericFilter();
+    const newFilters = filtersType.filter((fil) => fil !== filterType);
+    setFiltersType(newFilters);
   };
 
   return (
@@ -51,11 +69,14 @@ function Header() {
             onChange={ handleFilter }
             data-testid="column-filter"
           >
-            <option>population</option>
+            {filtersType.map((filter) => (
+              <option key={ filter }>{filter}</option>
+            ))}
+            {/* <option>population</option>
             <option>orbital_period</option>
             <option>diameter</option>
             <option>rotation_period</option>
-            <option>surface_water</option>
+            <option>surface_water</option> */}
           </select>
         </label>
         <label htmlFor="planetOperator">
@@ -76,14 +97,14 @@ function Header() {
             type="number"
             name="number"
             id="number"
-            value="0"
+            value={ valueType }
             onChange={ handleValueType }
             data-testid="value-filter"
           />
         </label>
         <button
           type="button"
-          onClick={ handleNumericFilter }
+          onClick={ handleFiltersType }
           data-testid="button-filter"
         >
           Filtrar
