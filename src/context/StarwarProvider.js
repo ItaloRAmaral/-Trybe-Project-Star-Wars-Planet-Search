@@ -74,6 +74,7 @@ function StarwarProvider(props) {
     valueType,
     filtersType,
     setFiltersType,
+    setNumericFilter,
   };
 
   return (

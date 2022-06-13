@@ -14,14 +14,6 @@ function Header() {
     handleNumericFilter,
   } = useContext(StarwarContext);
 
-  // const filtersType = [
-  //   'population',
-  //   'orbital_period',
-  //   'diameter',
-  //   'rotation_period',
-  //   'surface_water',
-  // ];
-
   const handleSearch = ({ target }) => {
     const name = target.value.toLowerCase();
     handleChange(name);
@@ -72,11 +64,6 @@ function Header() {
             {filtersType.map((filter) => (
               <option key={ filter }>{filter}</option>
             ))}
-            {/* <option>population</option>
-            <option>orbital_period</option>
-            <option>diameter</option>
-            <option>rotation_period</option>
-            <option>surface_water</option> */}
           </select>
         </label>
         <label htmlFor="planetOperator">

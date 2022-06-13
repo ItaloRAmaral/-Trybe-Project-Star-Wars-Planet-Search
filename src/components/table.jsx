@@ -10,6 +10,9 @@ function Table() {
     filtredPlanets,
     setFiltredPlanets,
     numericFilter,
+    setNumericFilter,
+    setFiltersType,
+    filtersType,
   } = useContext(StarwarContext);
 
   useEffect(() => {
@@ -48,22 +51,58 @@ function Table() {
     setFiltredPlanets(newFilter);
   }, [searchByName, numericFilter, planets, setFiltredPlanets]);
 
+  const handleDeleteFilter = ({ target }) => {
+    const filterName = target.name;
+    const newNumericFilter = numericFilter
+      .filter((filter) => filter.filterType !== filterName);
+    setNumericFilter(newNumericFilter);
+    setFiltersType([...filtersType, filterName]);
+  };
+
+  const handleDeleteAll = () => {
+    setNumericFilter([]);
+    setFiltersType([
+      'population',
+      'orbital_period',
+      'diameter',
+      'rotation_period',
+      'surface_water',
+    ]);
+  };
+
   return (
     <section>
-      {
-        numericFilter.length > 0 && (
-          <h1>Filtros Aplicado</h1>
-        )
-      }
-      {
-        numericFilter.length > 0 && (
-          numericFilter.map((filter) => (
-            <span key={ filter.filterType }>
-              {`${filter.filterType} 
+      {numericFilter.length > 0 && <h1>Filtros Aplicado</h1>}
+      {numericFilter.length > 0
+        && numericFilter.map((filter) => (
+          <div
+            key={ filter.filterType }
+            name={ filter.filterType }
+            data-testid="filter"
+          >
+            <span>
+              {`${filter.filterType}
             & ${filter.operatorType} ${filter.valueType}`}
-            </span>))
-        )
-      }
+            </span>
+            <button
+              type="button"
+              name={ filter.filterType }
+              onClick={ handleDeleteFilter }
+              // data-testid="button-remove-filters"
+            >
+              X
+            </button>
+          </div>
+        ))}
+      {numericFilter.length > 0 && (
+        <button
+          type="button"
+          onClick={ handleDeleteAll }
+          data-testid="button-remove-filters"
+        >
+          Remover Filtros
+        </button>
+      )}
       <table>
         <thead>
           <tr>
