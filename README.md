@@ -39,4 +39,6 @@ npm start
 ## :iphone: Como funciona
 <img src="./starWarsHowItWorks.gif" />
 
-## OBS: Este projeto foi realizado com proposta educacional e não comercial, portanto, não é autorizado o uso deste código com principios além do educacional
+##
+
+<span style="font-size:8px">OBS: Este projeto foi realizado com proposta educacional e não comercial, portanto, não é autorizado o uso deste código com principios além do educacional</span>
