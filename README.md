@@ -4,6 +4,8 @@
 ## :page_with_curl: Sobre
 O desafio deste projeto era criar uma lista com filtros de planetas do universo de Star Wars usando Context API e Hooks para controlar os estados globais.
 
+<span style="font-size:8px">OBS: Este projeto foi realizado com proposta educacional e não comercial, não é autorizado o uso deste código com principios além do educacional</span>
+
 ## ⚙️ Como Executar
 Clone o repositório em uma pasta de preferência
 
