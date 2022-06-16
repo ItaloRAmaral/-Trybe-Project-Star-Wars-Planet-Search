@@ -12,6 +12,12 @@ function Header() {
     filtersType,
     setFiltersType,
     handleNumericFilter,
+    /// test
+    setColumnOrder,
+    columnOrder,
+    setTypeOrder,
+    typeOrder,
+    setOrder,
   } = useContext(StarwarContext);
 
   const handleSearch = ({ target }) => {
@@ -40,86 +46,137 @@ function Header() {
     setFiltersType(newFilters);
   };
 
+  /// Testando a aprtir daqui
+  const handleColumnOrder = ({ target }) => {
+    const { value } = target;
+    setColumnOrder(value);
+  };
+
+  const handleTypeOrder = ({ target }) => {
+    const { name } = target;
+    setTypeOrder(name);
+  };
+
+  const handleOrderUpdate = () => {
+    console.log('teste botão');
+    setOrder({
+      column: columnOrder,
+      sort: typeOrder,
+    });
+  };
+
   return (
-    <section>
-      <h1>Star Wars Planets Search</h1>
-      <label htmlFor="planetName">
-        Planet Name
+    <section className="header-container">
+      <h1 className="title">Star Wars Planets Search</h1>
+      <label htmlFor="planetName" className="planet-label">
         <input
           type="text"
           onChange={ handleSearch }
           name="planetName"
           id="planetName"
+          placeholder="Planet Name"
           data-testid="name-filter"
         />
       </label>
-      <div>
-        <label htmlFor="planetParameter">
-          Column
-          <select
-            id="planetParameter"
-            onChange={ handleFilter }
-            data-testid="column-filter"
+      <section className="forms-div">
+        <div className="teste">
+
+          <label htmlFor="planetParameter" className="input-label">
+            Column
+            <select
+              id="planetParameter"
+              onChange={ handleFilter }
+              data-testid="column-filter"
+            >
+              {filtersType.map((filter) => (
+                <option key={ filter }>{filter}</option>
+              ))}
+            </select>
+          </label>
+          <label htmlFor="planetOperator" className="input-label">
+            Operator
+            <select
+              id="planetOperator"
+              onChange={ handleOperator }
+              data-testid="comparison-filter"
+            >
+              <option>maior que</option>
+              <option>menor que</option>
+              <option>igual a</option>
+            </select>
+          </label>
+          <label htmlFor="number" className="input-label">
+            Number
+            <input
+              type="number"
+              name="number"
+              id="number"
+              value={ valueType }
+              onChange={ handleValueType }
+              className="input-label"
+              data-testid="value-filter"
+            />
+          </label>
+          <button
+            type="button"
+            onClick={ handleFiltersType }
+            className="filter-buttons"
+            data-testid="button-filter"
           >
-            {filtersType.map((filter) => (
-              <option key={ filter }>{filter}</option>
-            ))}
-          </select>
-        </label>
-        <label htmlFor="planetOperator">
-          Operator
-          <select
-            id="planetOperator"
-            onChange={ handleOperator }
-            data-testid="comparison-filter"
+            Filtrar
+          </button>
+        </div>
+        <div className="teste">
+
+          <label htmlFor="planetOrder" className="input-label">
+            Order
+            <select
+              id="planetOrder"
+              onChange={ handleColumnOrder }
+              data-testid="column-sort"
+            >
+              <option>population</option>
+              <option>orbital_period</option>
+              <option>diameter</option>
+              <option>rotation_period</option>
+              <option>surface_water</option>
+            </select>
+          </label>
+          <div className="order-container">
+            <label htmlFor="ascendente" className="order-label">
+              Ascendente
+              <input
+                type="radio"
+                name="ASC"
+                value="ASC"
+                id="ascendente"
+                onChange={ handleTypeOrder }
+                data-testid="column-sort-input-asc"
+              />
+            </label>
+
+            <label htmlFor="Descendente" className="order-label">
+              Descendente
+              <input
+                type="radio"
+                name="DESC"
+                value="DESC"
+                id="Descendente"
+                onChange={ handleTypeOrder }
+                data-testid="column-sort-input-desc"
+              />
+            </label>
+          </div>
+          <button
+            type="button"
+            onClick={ handleOrderUpdate }
+            className="filter-buttons"
+            data-testid="column-sort-button"
           >
-            <option>maior que</option>
-            <option>menor que</option>
-            <option>igual a</option>
-          </select>
-        </label>
-        <label htmlFor="number">
-          Number
-          <input
-            type="number"
-            name="number"
-            id="number"
-            value={ valueType }
-            onChange={ handleValueType }
-            data-testid="value-filter"
-          />
-        </label>
-        <button
-          type="button"
-          onClick={ handleFiltersType }
-          data-testid="button-filter"
-        >
-          Filtrar
-        </button>
-      </div>
-      <div>
-        <label htmlFor="planetOrder">
-          Order
-          <select id="planetOrder">
-            <option>population</option>
-            <option>orbital_period</option>
-            <option>diameter</option>
-            <option>rotation_period</option>
-            <option>surface_water</option>
-          </select>
-        </label>
-      </div>
-      <div>
-        <label htmlFor="ascendente">
-          Ascendente
-          <input type="radio" name="" id="ascendente" />
-        </label>
-        <label htmlFor="Descendente">
-          Descendente
-          <input type="radio" name="" id="Descendente" />
-        </label>
-        <button type="button">Ordenar</button>
-      </div>
+            Ordenar
+          </button>
+        </div>
+      </section>
     </section>
   );
 }

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import StarwarContext from './StarwarContext';
 
 function StarwarProvider(props) {
+  const [loading, setLoading] = useState(false);
   const [planets, setGetPlanets] = useState([]);
   const [searchByName, setSearchByName] = useState('');
   const [filtredPlanets, setFiltredPlanets] = useState([]);
@@ -16,16 +17,30 @@ function StarwarProvider(props) {
     'rotation_period',
     'surface_water',
   ]);
+  /// testando
+  const [order, setOrder] = useState({
+    column: 'name',
+    sort: 'ASC',
+  });
+  const [columnOrder, setColumnOrder] = useState('population');
+  const [typeOrder, setTypeOrder] = useState('ASC');
+  const [planetsData, setPlanetsData] = useState({
+    unknownData: [],
+    planetsOrderedData: [],
+  });
 
   const fetchPlanets = async () => {
+    setLoading(true);
     try {
       const url = 'https://swapi-trybe.herokuapp.com/api/planets/';
       const fetchData = await fetch(url);
       const { results } = await fetchData.json();
       setGetPlanets(results);
       setFiltredPlanets(results);
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
@@ -57,6 +72,7 @@ function StarwarProvider(props) {
 
   const { children } = props;
   const contextType = {
+    loading,
     fetchPlanets,
     planets,
     handleChange,
@@ -75,6 +91,15 @@ function StarwarProvider(props) {
     filtersType,
     setFiltersType,
     setNumericFilter,
+    /// testando
+    order,
+    setOrder,
+    setColumnOrder,
+    columnOrder,
+    setTypeOrder,
+    typeOrder,
+    setPlanetsData,
+    planetsData,
   };
 
   return (

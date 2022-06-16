@@ -8,7 +8,7 @@ function TableInfo(props) {
     <tbody>
       {planet === undefined ? null : (
         <tr>
-          <td>{planet.name}</td>
+          <td data-testid="planet-name">{planet.name}</td>
           <td>{planet.rotation_period}</td>
           <td>{planet.orbital_period}</td>
           <td>{planet.diameter}</td>
@@ -17,10 +17,10 @@ function TableInfo(props) {
           <td>{planet.terrain}</td>
           <td>{planet.surface_water}</td>
           <td>{planet.population}</td>
-          <td>{planet.films}</td>
+          {/* <td>{planet.films}</td>
           <td>{planet.created}</td>
           <td>{planet.edited}</td>
-          <td>{planet.url}</td>
+          <td>{planet.url}</td> */}
         </tr>
       )}
     </tbody>
