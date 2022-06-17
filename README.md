@@ -4,19 +4,6 @@
 ## :page_with_curl: Sobre
 O desafio deste projeto era criar uma lista com filtros de planetas do universo de Star Wars usando Context API e Hooks para controlar os estados globais.
 
-## ⚙️ Como Executar
-Clone o repositório em uma pasta de preferência
-
-```
-git clone git@github.com:ItaloRAmaral/Star-Wars-Planet-Search.git
-
-Entre na pasta que você acabou de clonar, e instale as dependencias
-
-npm install
-
-npm start
-```
-
 ## :memo: Metodologia Utilizada
 
 * Kanban
@@ -35,6 +22,21 @@ npm start
 * REACT
 * CONTEXT API
 * CSS PURO
+
+## ⚙️ Como Executar
+Clone o repositório em uma pasta de preferência
+
+```
+git clone git@github.com:ItaloRAmaral/Star-Wars-Planet-Search.git
+```
+
+Entre na pasta que você acabou de clonar, e instale as dependencias
+
+```
+npm install
+
+npm start
+```
 
 ## :iphone: Como funciona
 <img src="./starWarsHowItWorks.gif" />
